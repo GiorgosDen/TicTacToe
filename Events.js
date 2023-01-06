@@ -149,10 +149,7 @@ function clearGame(){
     //Take message 
     var message= document.getElementById('message');
     message.style.zIndex=-1;
-    message.style.gridColumnStart='4';
-    message.style.gridColumnEnd='6';
-    message.style.gridRowStart='-4';
-    message.style.gridRowEnd='-3';
+    message.style.visibility='hidden';
 }
 
 function winnInfo(winner){
@@ -160,8 +157,5 @@ function winnInfo(winner){
     mess.innerHTML=winner;
     var message= document.getElementById('message');
     message.style.zIndex=2;
-    message.style.gridColumnStart='4';
-    message.style.gridColumnEnd='6';
-    message.style.gridRowStart='4';
-    message.style.gridRowEnd='5';
+    message.style.visibility='visible';
 }

@@ -66,6 +66,7 @@ img{
     text-align: center;
     grid-column-start: 4;
     grid-column-end: 6;
-    grid-row-start: -4;
-    grid-row-end: -3;
+    grid-row-start: 4;
+    grid-row-end: 5;
+    visibility: hidden;
 }
