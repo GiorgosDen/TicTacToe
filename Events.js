@@ -147,8 +147,12 @@ function clearGame(){
         images[i].style.height="50%";
     }
     //Take message 
-    var mess= document.getElementById('message');
-    mess.style.zIndex=-1;
+    var message= document.getElementById('message');
+    message.style.zIndex=-1;
+    message.style.gridColumnStart='4';
+    message.style.gridColumnEnd='6';
+    message.style.gridRowStart='-4';
+    message.style.gridRowEnd='-3';
 }
 
 function winnInfo(winner){
@@ -156,4 +160,8 @@ function winnInfo(winner){
     mess.innerHTML=winner;
     var message= document.getElementById('message');
     message.style.zIndex=2;
+    message.style.gridColumnStart='4';
+    message.style.gridColumnEnd='6';
+    message.style.gridRowStart='4';
+    message.style.gridRowEnd='5';
 }
