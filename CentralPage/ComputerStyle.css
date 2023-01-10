@@ -1,0 +1,18 @@
+body{
+    background-color: bisque;
+    grid-template-columns: 20% 40% 40% 20%;
+    grid-template-rows: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10% ;
+    text-align: center;
+}
+nav{
+    grid-column-start: 1;
+    grid-column-end: 1;
+    grid-row-start: 1;
+    grid-row-end: 3;
+}
+#central{
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 4;
+    grid-row-end: 8;
+}
