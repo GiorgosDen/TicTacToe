@@ -4,16 +4,32 @@
         <meta charset="utf-8">
         <title>Tic Tac Toe</title>
         <link rel="stylesheet" media="screen and (min-width: 801px)" href="ComputerStyle.css">
+        <script src="Actions.js"></script>
     </head>
     <body>
-        <nav></nav>
-        <main id="central">
-            <h1>Welocome in TicTacToe Game!!!</h1>
-            <div>
-                <button>Info</button>
-                <button>1 Player</button>
+        <nav>
+
+        </nav>
+        <main>
+            <section>
+                <h1>Welocome to the TicTacToe Game!!!</h1>
+                <button onclick="printInfo();">Info</button>
+                <button onclick="window.location.href='../OnePlayer/Page.html'">1 Player</button>
                 <button onclick="window.location.href='../TwoPlayers/Page.html'">2 Players</button>
-            </div>
+            </section>
         </main>
     </body>
+    <section id="infoPanel">
+        <h3 id="infoTitle">Info</h3>
+        <p>
+            Το παιχνίδι TicTacToe ή τρίλιζα, αποτελεί
+            ένα απλό,<br> αλλά ταυτόχρονα διασκεδαστικό παιχνίδι.
+            Αποτελείται από <br>ένα πίνακα 9 πλαισίων και διαστάσεων 
+            3χ3 , όπου στόχος του<br> κάθε παίκτη είναι να συμπληρώσει
+            μαι σειρά, στύλη ή διαγώνιο<br> με το ίδιο σχήμα. Συμμετέχουν
+            2 παίκτες και ο καθένας μπορεί<br> να έχει είτε τους κύκλους,
+            είτε τα Χ. 
+        </p>
+        <button onclick="closeInfo();">Επιστροφή</button>
+    </section>
 </html>
