@@ -10,6 +10,9 @@ var playerScore;
 var moves;
 //3. 
 var snozeGame=false;
+//4. Computer round part
+AvRows=[true,true,true];//If AvRows[0]==false -> It's means row[0](1st) has 3 elementes (is full)
+AvCols=[true,true,true];//Same with AvRows , but for colums
 //Functions and Events
 window.onload = function(){
     player=1;
@@ -34,15 +37,168 @@ function playTicTacToe(imgid){
     
     if(!snozeGame){
         //Computer
-       var flag=false;
+       var flag=false;//If computer places element (true)
+       var Nextlevel=true;//Gia na min caxnei na vrei grammi/stuli kai diagvnio me ena stoixeio , ean exei vrei kapoia me 2
        var compImgID="img";
        var max=0.3;
        var min=0.1;
+       var compNumber=0;//Number of row/col/diagonal
+       var nextCompPlace=-1;//0 row, 1 col, 2 diagonal central
        var CurrentAlgorithm = Math.floor((Math.random()*(max-min)+min)*10);
        console.log("Computer algorithm "+CurrentAlgorithm);
 
+      
+       for(var i=0; i<3; i++){
+            if(chekRowColDiagForXElements(i,1,2,"row") && checkRowAvail(i)){
+                console.log(2+" elements , row: "+i+" PASS");
+                compNumber=i;
+                nextCompPlace=0;
+                Nextlevel=false;
+                break;
+            }else if(chekRowColDiagForXElements(i,1,2,"col") && checkColAvail(i)){
+                console.log(2+" elements , col: "+i+" PASS");
+                compNumber=i;
+                nextCompPlace=1;
+                Nextlevel=false;
+                break;
+            }else if(chekRowColDiagForXElements(i,1,2,"diag") ){
+                console.log(2+" elements , diagonal: "+i)+" PASS";
+                compNumber=i;
+                nextCompPlace=i+1;
+                Nextlevel=false;
+                break;
+            }
+       }
+       console.log(Nextlevel + " NextLevel Flag");
+       //AN den vrike kapoia grammi, stili , diagwnio me 2 elements tou antipalou , psachnei gia ena
+       if(Nextlevel){
+            let f=false;
+            for(var i=0; i<3; i++){
+                for(var j=0; j<3; j++){
+                    if(tictactoeArea[i][j]==0){
+                        compImgID+=(i+1);
+                        compImgID+=(j+1);
+                        
+                        if(changeImageBack(compImgID,2)){
+                            changeImage(compImgID,2);
+                            updateRowAvail(i);
+                            updateColAvail(j);
+                            moves+=1;
+                            f=true;
+                            compImgID="img";
+                            break;
+                        }
+                    }
+                }
+                if(f){
+                    break;
+                }
+            }
+       }
+       Nextlevel=true;
+       if(nextCompPlace!=-1){
+        
+            if(nextCompPlace==0){
+                //row
+                for(var i=0; i<3; i++){
+                    if(tictactoeArea[compNumber][i]==0){
+                        compImgID+=(compNumber+1);
+                        compImgID+=(i+1);
+                        
+                        if(changeImageBack(compImgID,2)){
+                            changeImage(compImgID,2);
+                            updateRowAvail(compNumber);
+                            moves+=1;
+                            flag=true;
+                            compImgID="img";
+                            break;
+                        }
+                    }
+                }
+            }else if(nextCompPlace==1){
+                //col
+                for(var i=0; i<3; i++){
+                    if(tictactoeArea[i][compNumber]==0){
+                        compImgID+=(i+1);
+                        compImgID+=(compNumber+1);
+                        
+                        if(changeImageBack(compImgID,2)){
+                            changeImage(compImgID,2);
+                            updateColAvail(compNumber);
+                            moves+=1;
+                            flag=true;
+                            compImgID="img";
+                            break;
+                        }
+                    }
+                }
+            }else if(nextCompPlace==2){
+                //central diagonal
+                if(tictactoeArea[0][0]==0){
+                    if(changeImageBack("img11",2)){
+                        changeImage("img11",2);
+                        moves+=1;
+                        flag=true;
+                        compImgID="img";
+                        updateColAvail(0);
+                        updateRowAvail(0);
+                    }
+                }else if(tictactoeArea[1][1]==0){
+                    if(changeImageBack("img22",2)){
+                        changeImage("img22",2);
+                        moves+=1;
+                        flag=true;
+                        compImgID="img";
+                        updateColAvail(1);
+                        updateRowAvail(1);
+                    }
+                }else if(tictactoeArea[2][2]==0){
+                    if(changeImageBack("img33",2)){
+                        changeImage("img33",2);
+                        moves+=1;
+                        flag=true;
+                        compImgID="img";
+                        updateColAvail(2);
+                        updateRowAvail(2);
+                    }
+                }
+            }else if(nextCompPlace==3){
+                //
+                if(tictactoeArea[2][0]==0){
+                    if(changeImageBack("img31",2)){
+                        changeImage("img31",2);
+                        moves+=1;
+                        flag=true;
+                        compImgID="img";
+                        updateColAvail(0);
+                        updateRowAvail(2);
+                    }
+                }else if(tictactoeArea[1][1]==0){
+                    if(changeImageBack("img22",2)){
+                        changeImage("img22",2);
+                        moves+=1;
+                        flag=true;
+                        compImgID="img";
+                        updateColAvail(1);
+                        updateRowAvail(1);
+                    }
+                }else if(tictactoeArea[0][2]==0){
+                    if(changeImageBack("img13",2)){
+                        changeImage("img13",2);
+                        moves+=1;
+                        flag=true;
+                        compImgID="img";
+                        updateColAvail(2);
+                        updateRowAvail(0);
+                    }
+                }
+            }
+            if(gameEnd()){
+                console.log("Round Ends");
+                }
+       }
        //Algorithm "First Place"
-       if(CurrentAlgorithm==1){
+       /*if(CurrentAlgorithm==1){
             for(var i=0; i<3; i++){
                 for(var j=0; j<3; j++){
                     if(tictactoeArea[i][j]==0){
@@ -120,8 +276,8 @@ function playTicTacToe(imgid){
        if(gameEnd()){
         console.log("Round Ends");
         }
-    }
-
+    }*/
+}
     
 }
 
@@ -235,6 +391,11 @@ function resetGame(){
     player=1;
     //Set moves 0
     moves=0;
+    //Remove computer moves (Availiable rows ...)
+    for(var i=0; i<3; i++){
+        AvRows[i]=true;
+        AvCols[i]=true;
+    }
 }
 
 function clearGame(){
@@ -264,3 +425,98 @@ function winnInfo(winner){
 //Computer Only Area
 
 //Computer turn
+
+function chekRowColDiagForXElements(rcd,number,x,name){
+    //rcd: number of row/col/diagonal 
+    //number : 1 for player and 2 for computer
+    //x: check for x number elements in row
+    //name : "row", "col", "diag"
+    var sum=0;
+    if(name=="col"){
+        for(var i=0; i<3; i++){
+            if(tictactoeArea[i][rcd]==number){
+                sum++;
+            }
+        }
+        if(sum==x){
+            return true;
+        }
+    }else if(name=="row"){
+        for(var i=0; i<3; i++){
+            if(tictactoeArea[rcd][i]==number){
+                sum++;
+            }
+        }
+        if(sum==x){
+            return true;
+        }
+    }else{
+        //1 ceentral diagonal
+        if(rcd==1){
+            for(var i=0; i<3; i++){
+                for(var j=0; j<3; j++){
+                    if(i==j && tictactoeArea[i][j]==number){
+                        sum++;
+                    }
+                }
+            }
+            if(sum==x){
+                return true;
+            }
+        }else if(rcd==2){
+            if(tictactoeArea[0][2]==number){
+                sum++;
+            }
+            if(tictactoeArea[2][0]==number){
+                sum++;
+            }
+            if(tictactoeArea[1][1]==number){
+                sum++;
+            }
+            if(sum==x){
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+
+
+//Check Row's Diathesimotita
+function checkRowAvail(numberRow){
+    return AvRows[numberRow];
+}
+
+//Update Row's Diathesimotita
+function updateRowAvail(numberRow){
+    var sum =0;
+    for(var i=0; i<3; i++){
+        if(tictactoeArea[numberRow][i]!=0){
+            sum++;
+        }
+    }
+    if(sum==3){
+        //Full Row
+        //Update table AvRows
+        AvRows[numberRow]=false;
+    }
+}
+
+//====
+
+function checkColAvail(numberCol){
+    return AvCols[numberCol];
+}
+
+function updateColAvail(numberCol){
+    var sum=0;
+    for(var i=0; i<3; i++){
+        if(tictactoeArea[i][numberCol]!=0){
+            sum++;
+        }
+    }
+    if(sum==3){
+        AvCols[numberCol]=false;
+    }
+}
