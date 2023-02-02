@@ -13,6 +13,7 @@ var snozeGame=false;
 //4. Computer round part
 AvRows=[true,true,true];//If AvRows[0]==false -> It's means row[0](1st) has 3 elementes (is full)
 AvCols=[true,true,true];//Same with AvRows , but for colums
+AvDaig=[true,true];//Same with another , but loc 0 is for basic diagonal and loc 1 for the another
 //Functions and Events
 window.onload = function(){
     player=1;
@@ -61,8 +62,8 @@ function playTicTacToe(imgid){
                 nextCompPlace=1;
                 Nextlevel=false;
                 break;
-            }else if(chekRowColDiagForXElements(i,1,2,"diag") ){
-                console.log(2+" elements , diagonal: "+i)+" PASS";
+            }else if(chekRowColDiagForXElements(i,1,2,"diag") && i>0 && checkDiagAvail(i)){
+                console.log(2+" elements , diagonal: "+i+" PASS");
                 compNumber=i;
                 nextCompPlace=i+1;
                 Nextlevel=false;
@@ -83,6 +84,8 @@ function playTicTacToe(imgid){
                             changeImage(compImgID,2);
                             updateRowAvail(i);
                             updateColAvail(j);
+                            updateDiagAvail(1);
+                            updateDiagAvail(2);
                             moves+=1;
                             f=true;
                             compImgID="img";
@@ -95,7 +98,7 @@ function playTicTacToe(imgid){
                 }
             }
        }
-       Nextlevel=true;
+       //Nextlevel=true;
        if(nextCompPlace!=-1){
         
             if(nextCompPlace==0){
@@ -108,6 +111,8 @@ function playTicTacToe(imgid){
                         if(changeImageBack(compImgID,2)){
                             changeImage(compImgID,2);
                             updateRowAvail(compNumber);
+                            updateDiagAvail(1);
+                            updateDiagAvail(2);
                             moves+=1;
                             flag=true;
                             compImgID="img";
@@ -125,6 +130,8 @@ function playTicTacToe(imgid){
                         if(changeImageBack(compImgID,2)){
                             changeImage(compImgID,2);
                             updateColAvail(compNumber);
+                            updateDiagAvail(1);
+                            updateDiagAvail(2);
                             moves+=1;
                             flag=true;
                             compImgID="img";
@@ -142,6 +149,8 @@ function playTicTacToe(imgid){
                         compImgID="img";
                         updateColAvail(0);
                         updateRowAvail(0);
+                        updateDiagAvail(1);
+                        updateDiagAvail(2);
                     }
                 }else if(tictactoeArea[1][1]==0){
                     if(changeImageBack("img22",2)){
@@ -151,6 +160,8 @@ function playTicTacToe(imgid){
                         compImgID="img";
                         updateColAvail(1);
                         updateRowAvail(1);
+                        updateDiagAvail(1);
+                        updateDiagAvail(2);
                     }
                 }else if(tictactoeArea[2][2]==0){
                     if(changeImageBack("img33",2)){
@@ -160,6 +171,8 @@ function playTicTacToe(imgid){
                         compImgID="img";
                         updateColAvail(2);
                         updateRowAvail(2);
+                        updateDiagAvail(1);
+                        updateDiagAvail(2);
                     }
                 }
             }else if(nextCompPlace==3){
@@ -172,6 +185,8 @@ function playTicTacToe(imgid){
                         compImgID="img";
                         updateColAvail(0);
                         updateRowAvail(2);
+                        updateDiagAvail(2);
+                        updateDiagAvail(1);
                     }
                 }else if(tictactoeArea[1][1]==0){
                     if(changeImageBack("img22",2)){
@@ -181,6 +196,8 @@ function playTicTacToe(imgid){
                         compImgID="img";
                         updateColAvail(1);
                         updateRowAvail(1);
+                        updateDiagAvail(2);
+                        updateDiagAvail(1);
                     }
                 }else if(tictactoeArea[0][2]==0){
                     if(changeImageBack("img13",2)){
@@ -190,6 +207,8 @@ function playTicTacToe(imgid){
                         compImgID="img";
                         updateColAvail(2);
                         updateRowAvail(0);
+                        updateDiagAvail(2);
+                        updateDiagAvail(1);
                     }
                 }
             }
@@ -301,6 +320,10 @@ function changeImageBack(imgid,pl){
     if(tictactoeArea[rowP][colP]==0){
         tictactoeArea[rowP][colP]=pl;
         //console.log(tictactoeArea[rowP][colP]);
+        updateColAvail(colP);
+        updateRowAvail(rowP);
+        updateDiagAvail(1);
+        updateDiagAvail(2);
         return true;
     }
     //console.log("fail paikti seira");
@@ -396,6 +419,8 @@ function resetGame(){
         AvRows[i]=true;
         AvCols[i]=true;
     }
+    AvDaig[0]=true;
+    AvDaig[1]=true;
 }
 
 function clearGame(){
@@ -450,7 +475,7 @@ function chekRowColDiagForXElements(rcd,number,x,name){
         if(sum==x){
             return true;
         }
-    }else{
+    }else if(name=="diag"){
         //1 ceentral diagonal
         if(rcd==1){
             for(var i=0; i<3; i++){
@@ -518,5 +543,36 @@ function updateColAvail(numberCol){
     }
     if(sum==3){
         AvCols[numberCol]=false;
+    }
+}
+
+function checkDiagAvail(numberDiag){
+    return AvDaig[numberDiag-1];
+}
+
+function updateDiagAvail(numberDiag){
+    var sum=0;
+    if(tictactoeArea[1][1]!=0){
+        sum++;
+    }
+
+    if(numberDiag-1==0){
+        if(tictactoeArea[0][0]!=0){
+            sum++;
+        }
+        if(tictactoeArea[2][2]!=0){
+            sum++;
+        }
+    }else if(numberDiag-1==1){
+        if(tictactoeArea[0][2]!=0){
+            sum++;
+        }
+        if(tictactoeArea[2][0]!=0){
+            sum++;
+        }
+    }
+
+    if(sum==3){
+        AvDaig[numberDiag-1]=false;
     }
 }
