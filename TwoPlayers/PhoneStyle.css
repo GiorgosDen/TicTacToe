@@ -1,35 +1,35 @@
 body{
-    background-color: bisque;
+    background-color: rgb(230, 190, 145);
     display: grid;
     grid-template-rows: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10% ;
-    grid-template-columns: 10% 80% 10% ;
+    grid-template-columns: 100% ;
     
 }
 
 nav{
-    background-color: aquamarine;
-    grid-column-start: 2;
-    grid-column-end: 2;
+    background-color: rgb(125, 75, 15);
+    grid-column-start: 1;
+    grid-column-end: 1;
     grid-row-start: 1;
     grid-row-end: 3;
     text-align: center;
-    border-radius: 40px 20px 40px 20px;
+    border-radius: 40px 20px 0px 0px;
 }
 
 #centralPage{
     text-align: center;
-    background-color: coral;
-    grid-column-start: 2;
-    grid-column-end: 2;
+    background-color: rgb(190, 95, 65);
+    grid-column-start: 1;
+    grid-column-end: 1;
     grid-row-start: 3;
     grid-row-end: 10;
-    border-radius: 40px 20px 40px 20px;
+    border-radius: 0px 0px 0px 0px;
 }
 
 #gamePanel{
-    background-color: coral;
-    grid-column-start: 2;
-    grid-column-end: 2;
+    background-color: rgb(190, 95, 65);
+    grid-column-start: 1;
+    grid-column-end: 1;
     grid-row-start: 4;
     grid-row-end: 6;
 }
@@ -37,6 +37,11 @@ table,td{
     border: 5px solid black;
     border-collapse: collapse;
     background-color: white;
+}
+
+button{
+    background-color: rgb(155, 125, 95);
+    text-align: center;
 }
 
 td{
@@ -48,26 +53,39 @@ img{
     height: 50%;
 }
 #scorePanel{
-    background-color: coral;
-    grid-column-start: 2;
-    grid-column-end: 2;
+    background-color: rgb(190, 95, 65);
+    grid-column-start: 1;
+    grid-column-end: 1;
     grid-row-start: 6;
     grid-row-end: 7;
     text-align: center;
-    border-radius: 40px 20px 40px 20px;
+    border-radius: 0px 0px 40px 20px;
 }
 
 #message{
+    margin-left: 4%;
     z-index: -1;
-    width: 350px;
+    width: 90%;
     height: 100px;
     border-radius: 20px 20px 20px 20px;
-    border: 5px solid rgb(255, 150, 150);
-    background-color: linen;
+    border: 5px solid rgb(135, 115, 40);
+    background-color: rgb(220, 190, 65);
     text-align: center;
-    grid-column-start: 2;
-    grid-column-end: 2;
+    grid-column-start: 1;
+    grid-column-end: 1;
     grid-row-start: 4;
     grid-row-end: 5;
-    visibility: hidden;
+    animation-name: k;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes showWinner {
+    from{opacity: 0; z-index: -1;}
+    to{opacity: 1; z-index: 2;}
+}
+
+@keyframes nextRound {
+    from{opacity: 1; z-index: 2;}
+    to{opacity: 0; z-index: -1;}
 }

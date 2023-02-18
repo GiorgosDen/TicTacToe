@@ -48,55 +48,175 @@ function playTicTacToe(imgid){
        var CurrentAlgorithm = Math.floor((Math.random()*(max-min)+min)*10);
        console.log("Computer algorithm "+CurrentAlgorithm);
 
-      
-       for(var i=0; i<3; i++){
-            if(chekRowColDiagForXElements(i,1,2,"row") && checkRowAvail(i)){
-                console.log(2+" elements , row: "+i+" PASS");
-                compNumber=i;
-                nextCompPlace=0;
-                Nextlevel=false;
-                break;
-            }else if(chekRowColDiagForXElements(i,1,2,"col") && checkColAvail(i)){
-                console.log(2+" elements , col: "+i+" PASS");
-                compNumber=i;
-                nextCompPlace=1;
-                Nextlevel=false;
-                break;
-            }else if(chekRowColDiagForXElements(i,1,2,"diag") && i>0 && checkDiagAvail(i)){
-                console.log(2+" elements , diagonal: "+i+" PASS");
-                compNumber=i;
-                nextCompPlace=i+1;
-                Nextlevel=false;
-                break;
-            }
-       }
-       console.log(Nextlevel + " NextLevel Flag");
-       //AN den vrike kapoia grammi, stili , diagwnio me 2 elements tou antipalou , psachnei gia ena
-       if(Nextlevel){
-            let f=false;
+      if(Nextlevel){
+            //Computer winn check
             for(var i=0; i<3; i++){
-                for(var j=0; j<3; j++){
-                    if(tictactoeArea[i][j]==0){
-                        compImgID+=(i+1);
-                        compImgID+=(j+1);
-                        
-                        if(changeImageBack(compImgID,2)){
-                            changeImage(compImgID,2);
-                            updateRowAvail(i);
-                            updateColAvail(j);
-                            updateDiagAvail(1);
-                            updateDiagAvail(2);
-                            moves+=1;
-                            f=true;
-                            compImgID="img";
-                            break;
-                        }
-                    }
+                if(chekRowColDiagForXElements(i,1,2,"row") && checkRowAvail(i)){
+                    console.log(2+" elements , row: "+i+" PASS");
+                    compNumber=i;
+                    nextCompPlace=0;
+                    Nextlevel=false;
+                    break;
+                }else if(chekRowColDiagForXElements(i,1,2,"col") && checkColAvail(i)){
+                    console.log(2+" elements , col: "+i+" PASS");
+                    compNumber=i;
+                    nextCompPlace=1;
+                    Nextlevel=false;
+                    break;
+                }else if(chekRowColDiagForXElements(i,1,2,"diag") && i>0 && checkDiagAvail(i)){
+                    console.log(2+" elements , diagonal: "+i+" PASS");
+                    compNumber=i;
+                    nextCompPlace=i+1;
+                    Nextlevel=false;
+                    break;
+                }else if(chekRowColDiagForXElements(i,2,1,"row") && checkRowAvail(i)){
+                    console.log(2+" elements , row: "+i+" PASS");
+                    compNumber=i;
+                    nextCompPlace=0;
+                    Nextlevel=false;
+                    break;
+                }else if(chekRowColDiagForXElements(i,2,1,"col") && checkColAvail(i)){
+                    console.log(2+" elements , col: "+i+" PASS");
+                    compNumber=i;
+                    nextCompPlace=1;
+                    Nextlevel=false;
+                    break;
+                }else if(chekRowColDiagForXElements(i,2,1,"diag") && i>0 && checkDiagAvail(i)){
+                    console.log(2+" elements , diagonal: "+i+" PASS");
+                    compNumber=i;
+                    nextCompPlace=i+1;
+                    Nextlevel=false;
+                    break;
                 }
-                if(f){
+             }
+      }
+       //Block Player
+       /*if(Nextlevel){
+            for(var i=0; i<3; i++){
+                if(chekRowColDiagForXElements(i,2,1,"row") && checkRowAvail(i)){
+                    console.log(2+" elements , row: "+i+" PASS");
+                    compNumber=i;
+                    nextCompPlace=0;
+                    Nextlevel=false;
+                    break;
+                }else if(chekRowColDiagForXElements(i,2,1,"col") && checkColAvail(i)){
+                    console.log(2+" elements , col: "+i+" PASS");
+                    compNumber=i;
+                    nextCompPlace=1;
+                    Nextlevel=false;
+                    break;
+                }else if(chekRowColDiagForXElements(i,2,1,"diag") && i>0 && checkDiagAvail(i)){
+                    console.log(2+" elements , diagonal: "+i+" PASS");
+                    compNumber=i;
+                    nextCompPlace=i+1;
+                    Nextlevel=false;
                     break;
                 }
             }
+       }*/
+       console.log(Nextlevel + " NextLevel Flag Block");
+       //AN den vrike kapoia grammi, stili , diagwnio me 2 elements tou antipalou , psachnei gia ena
+       if(Nextlevel){
+            let f=false;
+            let fd=false;
+
+            if(tictactoeArea[1][1]==0){
+                compImgID+=(1+1);
+                compImgID+=(1+1);
+                            
+                if(changeImageBack(compImgID,2)){
+                    changeImage(compImgID,2);
+                    updateRowAvail(1);
+                    updateColAvail(1);
+                    updateDiagAvail(1);
+                    updateDiagAvail(2);
+                    moves+=1;
+                    fd=true;
+                    compImgID="img";
+                }
+            }else if(tictactoeArea[0][0]==0){
+                compImgID+=(0+1);
+                compImgID+=(0+1);
+                            
+                if(changeImageBack(compImgID,2)){
+                    changeImage(compImgID,2);
+                    updateRowAvail(0);
+                    updateColAvail(0);
+                    updateDiagAvail(1);
+                    updateDiagAvail(2);
+                    moves+=1;
+                    fd=true;
+                    compImgID="img";
+                }
+            }else if(tictactoeArea[2][2]==0){
+                compImgID+=(2+1);
+                compImgID+=(2+1);
+                            
+                if(changeImageBack(compImgID,2)){
+                    changeImage(compImgID,2);
+                    updateRowAvail(2);
+                    updateColAvail(2);
+                    updateDiagAvail(1);
+                    updateDiagAvail(2);
+                    moves+=1;
+                    fd=true;
+                    compImgID="img";
+                }
+            }else if(tictactoeArea[0][2]==0){
+                compImgID+=(0+1);
+                compImgID+=(2+1);
+                            
+                if(changeImageBack(compImgID,2)){
+                    changeImage(compImgID,2);
+                    updateRowAvail(0);
+                    updateColAvail(2);
+                    updateDiagAvail(1);
+                    updateDiagAvail(2);
+                    moves+=1;
+                    fd=true;
+                    compImgID="img";
+                }
+            }else if(tictactoeArea[2][0]==0){
+                compImgID+=(2+1);
+                compImgID+=(0+1);
+                            
+                if(changeImageBack(compImgID,2)){
+                    changeImage(compImgID,2);
+                    updateRowAvail(2);
+                    updateColAvail(0);
+                    updateDiagAvail(1);
+                    updateDiagAvail(2);
+                    moves+=1;
+                    fd=true;
+                    compImgID="img";
+                }
+            }
+            if(!fd){
+                for(var i=0; i<3; i++){
+                    for(var j=0; j<3; j++){
+                        if(tictactoeArea[i][j]==0){
+                            compImgID+=(i+1);
+                            compImgID+=(j+1);
+                            
+                            if(changeImageBack(compImgID,2)){
+                                changeImage(compImgID,2);
+                                updateRowAvail(i);
+                                updateColAvail(j);
+                                updateDiagAvail(1);
+                                updateDiagAvail(2);
+                                moves+=1;
+                                f=true;
+                                compImgID="img";
+                                break;
+                            }
+                        }
+                    }
+                    if(f){
+                        break;
+                    }
+                }
+            }
+            
        }
        //Nextlevel=true;
        if(nextCompPlace!=-1){
@@ -432,9 +552,7 @@ function clearGame(){
         images[i].style.height="50%";
     }
     //Take message 
-    var message= document.getElementById('message');
-    message.style.zIndex=-1;
-    message.style.visibility='hidden';
+    document.getElementById('message').style.animationName="nextRound";
     snozeGame=false;
     player=1;
 }
@@ -443,8 +561,7 @@ function winnInfo(winner){
     var mess= document.getElementById('mess');
     mess.innerHTML=winner;
     var message= document.getElementById('message');
-    message.style.zIndex=2;
-    message.style.visibility='visible';
+    message.style.animationName="showWinner";
 }
 
 //Computer Only Area

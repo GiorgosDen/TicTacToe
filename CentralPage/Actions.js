@@ -1,9 +1,8 @@
 function printInfo(){
-    document.getElementById('infoPanel').style.zIndex=2;
-    document.getElementById('infoPanel').style.visibility="visible";
+    document.getElementById('infoPanel').style.animationName= "showMenu"; 
 }
 
 function closeInfo(){
-    document.getElementById('infoPanel').style.zIndex=-1;
-    document.getElementById('infoPanel').style.visibility="hidden";
+    document.getElementById('infoPanel').style.animationName= "closeMenu";    
 }
+

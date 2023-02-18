@@ -23,6 +23,8 @@ function playTicTacToe(imgid){
         if(changeImageBack(imgid)){
             changeImage(imgid,player);
             moves+=1;
+       }else{
+        console.log("Apotuxia ");
        }
        if(gameEnd()){
             console.log("Round Ends");
@@ -154,8 +156,7 @@ function clearGame(){
     }
     //Take message 
     var message= document.getElementById('message');
-    message.style.zIndex=-1;
-    message.style.visibility='hidden';
+    message.style.animationName="nextRound";
     snozeGame=false;
     player=1;
 }
@@ -164,6 +165,5 @@ function winnInfo(winner){
     var mess= document.getElementById('mess');
     mess.innerHTML=winner;
     var message= document.getElementById('message');
-    message.style.zIndex=2;
-    message.style.visibility='visible';
+    message.style.animationName="showWinner";
 }
