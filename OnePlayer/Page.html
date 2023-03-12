@@ -3,8 +3,8 @@
     <head>
         <title>Tic Tac Toe</title>
         <meta charset="utf-8">
-        <link rel="stylesheet" media="screen and (min-width: 701px)" href="Computer1PStyle.css">
-        <link rel="stylesheet" media="screen and (max-width: 700px), screen and (max-height: 400px) " href="../TwoPlayers/PhoneStyle.css">
+        <link rel="stylesheet" href="Computer1PStyle.css">
+        <!--<link rel="stylesheet" media="screen and (max-width: 700px), screen and (max-height: 400px) " href="../TwoPlayers/PhoneStyle.css">-->
         <script src="Events_Player.js"></script>
     </head>
     <body>
@@ -35,10 +35,10 @@
                 <h2 id="player1">Player Score: 0</h2>
                 <h2 id="player2">Computer Score: 0</h2>
             </section>
+            <section id="message">
+                <h2 id="mess">Winner is</h2>
+                <button id="next" onclick="clearGame()">Next Round</button>
+            </section>
         </main>
-        <section id="message">
-            <h2 id="mess">Winner is</h2>
-            <button id="next" onclick="clearGame()">Next Round</button>
-        </section>
     </body>
 </html>

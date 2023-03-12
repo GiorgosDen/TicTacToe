@@ -12,23 +12,24 @@
         <main>
             <section id="menu" onmouseenter="" onmouseleave="">
                 <h1>Welocome to the TicTacToe Game!!!</h1>
-                <button onclick="printInfo();">Info</button>
-                <button onclick="window.location.href='../OnePlayer/Page.html'">1 Player</button>
-                <button onclick="window.location.href='../TwoPlayers/Page.html'">2 Players</button>
+                <button id="info" onmouseenter="markButton('info');" onmouseleave="normalButton('info');" onclick="printInfo();">Info</button>
+                <button id="player" onmouseenter="markButton('player');" onmouseleave="normalButton('player');" onclick="window.location.href='../OnePlayer/Page.html'">1 Player</button>
+                <button id="players" onmouseenter="markButton('players');" onmouseleave="normalButton('players');" onclick="window.location.href='../TwoPlayers/Page.html'">2 Players</button>
+            </section>
+            <section id="infoPanel">
+                <h3 id="infoTitle">Info</h3>
+                <p>
+                    Το παιχνίδι TicTacToe ή τρίλιζα, αποτελεί
+                    ένα απλό,<br> αλλά ταυτόχρονα διασκεδαστικό παιχνίδι.
+                    Αποτελείται από <br>ένα πίνακα 9 πλαισίων και διαστάσεων 
+                    3χ3 , όπου στόχος του<br> κάθε παίκτη είναι να συμπληρώσει
+                    μαι σειρά, στύλη ή διαγώνιο<br> με το ίδιο σχήμα. Συμμετέχουν
+                    2 παίκτες και ο καθένας μπορεί<br> να έχει είτε τους κύκλους,
+                    είτε τα Χ. 
+                </p>
+                <button id="specialButton" onmouseenter="markButton('specialButton');" onmouseleave="normalButton('specialButton');" onclick="closeInfo();">Επιστροφή</button>
             </section>
         </main>
     </body>
-    <section id="infoPanel">
-        <h3 id="infoTitle">Info</h3>
-        <p>
-            Το παιχνίδι TicTacToe ή τρίλιζα, αποτελεί
-            ένα απλό,<br> αλλά ταυτόχρονα διασκεδαστικό παιχνίδι.
-            Αποτελείται από <br>ένα πίνακα 9 πλαισίων και διαστάσεων 
-            3χ3 , όπου στόχος του<br> κάθε παίκτη είναι να συμπληρώσει
-            μαι σειρά, στύλη ή διαγώνιο<br> με το ίδιο σχήμα. Συμμετέχουν
-            2 παίκτες και ο καθένας μπορεί<br> να έχει είτε τους κύκλους,
-            είτε τα Χ. 
-        </p>
-        <button onclick="closeInfo();">Επιστροφή</button>
-    </section>
+    
 </html>
